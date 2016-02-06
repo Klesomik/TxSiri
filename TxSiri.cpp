@@ -1,3 +1,6 @@
+
+//TODO: using hash to low speed of program
+
 #include "Headers\Window.h"
 
 int  MainLoop (Node <string>* root);
