@@ -1,5 +1,7 @@
 #include "StdSiri.h"
 
+//Name file by default = "TreeFile//Data.txt"
+
 class DataFile
 {
     private:
@@ -10,7 +12,7 @@ class DataFile
         DataFile& operator = (const DataFile &from);
 
     public:
-        DataFile (const char mode[]);
+        DataFile (const char name[], const char mode[]);
 
         ~DataFile ();
 
@@ -18,8 +20,8 @@ class DataFile
         void write (Node <string>* current);
 };
 
-DataFile :: DataFile (const char mode[]):
-    binaryTree_ (fopen ("TreeFile//Data.txt", mode))
+DataFile :: DataFile (const char name[], const char mode[]):
+    binaryTree_ (fopen (name, mode))
     {
         assert (binaryTree_);
     }
