@@ -21,26 +21,37 @@ void WriteAboutObject (Node <string>* root)
         return;
     }
 
-    $y;
+    string buffer;
 
     for (int i = path.size () - 1; i >= 0; i--)
     {
-        $y;
-
         if (i > 1)
-            prints ("%s, ",  path[i].c_str ());
+        {
+            buffer += path[i].c_str ();
+            buffer += ", ";
+        }
 
         else if (i == 1)
-            prints ("%s ", path[i].c_str ());
+        {
+            buffer += path[i].c_str ();
+            buffer += " ";
+        }
 
         else if (path.size () - 1 == 0)
-            prints ("%s.\n",  path[i].c_str ());
+        {
+            buffer += path[i].c_str ();
+            buffer += ".\n";
+        }
 
         else if (i == 0)
-            prints ("è %s.\n",  path[i].c_str ());
+        {
+            buffer += "è ";
+            buffer += path[i].c_str ();
+            buffer += ".\n";
+        }
     }
 
-    $d;
+    $y; prints ("%s", buffer.c_str ()); $d;
 
     txSleep (500);
 }
