@@ -19,6 +19,10 @@ digraph DotGraph
     Node3 -> Node9 [color="black", style="solid", weight="1", label=""];
     Node10 [shape="box", color="black", fontcolor="black", fillcolor="black", style="solid", weight="1", label="л€гушка"];
     Node2 -> Node10 [color="black", style="solid", weight="1", label=""];
-    Node11 [shape="box", color="black", fontcolor="black", fillcolor="black", style="solid", weight="1", label="кот"];
+    Node11 [shape="box", color="black", fontcolor="black", fillcolor="black", style="solid", weight="1", label="м€гкий"];
     Node1 -> Node11 [color="black", style="solid", weight="1", label=""];
+    Node12 [shape="box", color="black", fontcolor="black", fillcolor="black", style="solid", weight="1", label="кот"];
+    Node11 -> Node12 [color="black", style="solid", weight="1", label=""];
+    Node13 [shape="box", color="black", fontcolor="black", fillcolor="black", style="solid", weight="1", label=" отик"];
+    Node11 -> Node13 [color="black", style="solid", weight="1", label=""];
 }

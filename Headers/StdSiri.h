@@ -14,7 +14,7 @@ void WriteAboutObject (Node <string>* root)
 
     if (nextAsk == true)
     {
-        $c prints ("Не обманывайте меня. Такого объекта нет. Хотите меня научить?\n"); $d
+        $c prints ("Не обманывайте меня. Я не знаю объекта %s. Хотите меня научить?\n", name); $d
 
         IWantNew (root);
 
@@ -66,30 +66,55 @@ void WriteAboutTwoObjects (Node <string>* root)
     vector <string> pathVasya;
     if (!ScanName (pathVasya, root, vasya, 2, false)) return;
 
-    $y;
-    if (pathPetya[0] == pathVasya[0]) prints ("Схожи тем, что они оба: ");
-    else prints ("У объектов нет сходств, ");
+    string buffer;
+
+    if (pathPetya[0] == pathVasya[0]) buffer += "Схожи тем, что они оба: ";
+    else buffer += "У объектов нет сходств, ";
 
     size_t size = max (pathPetya.size (), pathVasya.size ());
 
     for (size_t i = 0; i < size; i++)
     {
-        if (pathPetya[i] == pathVasya[i]) prints ("%s, ", pathVasya[i].c_str ());
+        if (pathPetya[i] == pathVasya[i])
+        {
+            buffer += pathVasya[i].c_str ();
+            buffer += ", ";
+        }
 
         else
         {
-            prints ("но %s ", petya);
-            for (size_t j = i; j < pathPetya.size (); j++) prints ("%s, ", pathPetya[j].c_str ());
+            buffer += "но ";
+            buffer += petya;
+            buffer += ": ";
 
-            prints ("а %s ", vasya);
-            for (size_t j = i; j < pathVasya.size (); j++)
+            for (size_t j = i; j < pathPetya.size (); j++)
             {
-                if (j < pathVasya.size () - 1) prints ("%s, ", pathVasya[j].c_str ());
-
-                else { prints ("%s.\n", pathVasya[j].c_str ()); $d }
+                buffer += pathPetya[j].c_str ();
+                buffer += ", ";
             }
 
-            return;
+            buffer += "а ";
+            buffer += vasya;
+            buffer += ": ";
+
+            for (size_t j = i; j < pathVasya.size (); j++)
+            {
+                if (j < pathVasya.size () - 1)
+                {
+                    buffer += pathVasya[j].c_str ();
+                    buffer += ", ";
+                }
+
+                else
+                {
+                    buffer += pathVasya[j].c_str ();
+                    buffer += ".\n";
+                }
+            }
+
+            break;
         }
     }
+
+    $y; prints ("%s", buffer.c_str ()); $d;
 }

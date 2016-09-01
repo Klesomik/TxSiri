@@ -3,7 +3,9 @@
 
 #include "Headers\Window.h"
 
-int  MainLoop (Node <string>* root, const char name[] = "TreeFile//Data.txt");
+void Work (Window &tx_version, const char name[] = "TreeFile//Data.txt");
+int  MainLoop (Node <string>* root, const char name[]);
+void DeleteBase (Node <string>* root);
 void Advertisement (bool hosting);
 void SiriThink (Node <string>* root);
 
@@ -15,35 +17,25 @@ int main()
 
     const char* name = printScan ("Введите файл для чтения/записи: ");
 
-    if (stricmp (name, "~") == 0)
-    {
-        printf ("Загрузка...\n");
-        Node <string>* root = tx_version.InIt ();
-        printf ("Загрузка завершена.\n\n");
-
-        tx_version.HelloSiri ();
-
-        int x = MainLoop (root);
-
-        $c prints ("%s", buySiri[x % 4]);
-    }
-
-    else
-    {
-        printf ("Загрузка...\n");
-        Node <string>* root = tx_version.InIt (name);
-        printf ("Загрузка завершена.\n\n");
-
-        tx_version.HelloSiri ();
-
-        int x = MainLoop (root, name);
-
-        $c prints ("%s", buySiri[x % 4]);
-    }
+    if (stricmp (name, "~") == 0) Work (tx_version);
+    else Work (tx_version, name);
 
     Sleep (2000);
 
     return 0;
+}
+
+void Work (Window &tx_version, const char name[])
+{
+    printf ("Загрузка...\n");
+    Node <string>* root = tx_version.InIt (name);
+    printf ("Загрузка завершена.\n\n");
+
+    tx_version.HelloSiri ();
+
+    int x = MainLoop (root, name);
+
+    $c prints ("%s", buySiri[x % 4]);
 }
 
 int MainLoop (Node <string>* root, const char name[])
@@ -62,7 +54,7 @@ int MainLoop (Node <string>* root, const char name[])
         else if (stricmp (cmd, "Дать определение")  == 0 || stricmp (cmd, "Д") == 0) WriteAboutObject (root);
         else if (stricmp (cmd, "Сравнить объекты")  == 0 || stricmp (cmd, "С") == 0) WriteAboutTwoObjects (root);
         else if (stricmp (cmd, "Показать дерево")   == 0 || stricmp (cmd, "П") == 0) { $c prints ("%s", treeSiri[i % 4]); $d DotDump <string> finish ("EX1", root); }
-        else if (stricmp (cmd, "Удалить базу")      == 0 || stricmp (cmd, "У") == 0);
+        else if (stricmp (cmd, "Удалить базу")      == 0 || stricmp (cmd, "У") == 0) DeleteBase (root);
         else if (stricmp (cmd, "Загадать объект\n") == 0 || stricmp (cmd, "З") == 0) SiriThink (root);
         else if (stricmp (cmd, " ")   == 0) continue;
         else if (stricmp (cmd, "\n")  == 0) continue;
@@ -82,11 +74,36 @@ int MainLoop (Node <string>* root, const char name[])
     }
 }
 
+void DeleteBase (Node <string>* root)
+{
+    $c; const char* ans = printsScan ("Вы действительно хотите удалить все мои знания? "); $d;
+
+    if (stricmp (ans, "Да")  == 0 || stricmp (ans, "Д") == 0)
+    {
+        delete root -> left  ();
+        delete root -> right ();
+
+        root -> left  () = nullptr;
+        root -> right () = nullptr;
+
+        root -> key () = "Неизвестно кто";
+    }
+
+    if (stricmp (ans, "Нет")  == 0 || stricmp (ans, "Н") == 0)
+    {
+        $c;
+
+        prints ("Я рада вашему обдуманному решению\n");
+
+        $d;
+    }
+}
+
 void Advertisement (bool hosting)
 {
     if (hosting)
     {
-        $y; prints ("РЕКЛАМА\n");
+        $y; prints ("Реклама:\n");
 
         prints ("Сайт методики довузовского обучения программированию и проектной деятельности в информатике: http://ded32.net.ru/\n");
         prints ("Автор: Дединский Илья Рудольфович\n"); $d;
@@ -100,15 +117,43 @@ void SiriThink (Node <string>* root)
 {
     srand (time (nullptr));
 
-    const int HTREE = 3;
+    string buffer;
 
     Node <string>* curr = root;
 
-    for (int how_many = rand () % HTREE + 1; how_many > 0; how_many--)
+    while (curr -> left () && curr -> right ())
     {
+        if (curr != root) buffer += ", ";
+
         int vect = rand () % 2 + 1;
 
-        if (vect == 1) { prints ("не %s, ", curr -> key ().c_str ()); curr = curr -> left ();  }
-        else           { prints ("%s, ", curr -> key ().c_str ());    curr = curr -> right (); }
+        if (vect == 1)
+        {
+            buffer += "не ";
+            buffer += curr -> key ().c_str ();
+
+            curr = curr -> left ();
+        }
+
+        else
+        {
+            buffer += curr -> key ().c_str ();
+
+            curr = curr -> right ();
+        }
     }
+
+    buffer += ".\n";
+
+    buffer[0] = (char) toupper (buffer[0]);
+
+    $y; prints ("%s", buffer.c_str ()); $c;
+
+    const char* answer = printScan ("Это...");
+
+    if (stricmp (answer, curr -> key ().c_str ()) == 0) prints ("Приятно иметь дело с умным человеком\n");
+
+    else prints ("К сожалению, вы не правы. Это был(а): %s\n", curr -> key ().c_str ());
+
+    $d;
 }

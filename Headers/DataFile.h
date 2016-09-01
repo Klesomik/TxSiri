@@ -1,7 +1,5 @@
 #include "StdSiri.h"
 
-//Name file by default = "TreeFile//Data.txt"
-
 class DataFile
 {
     private:

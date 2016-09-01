@@ -176,6 +176,8 @@ bool ScanName (vector <string> &pathPetya, Node <string>* root, char petya[NAME_
         return false;
     }
 
+    nextAsk = false;
+
     reverse (pathPetya.begin (), pathPetya.end ());
 
     return true;
