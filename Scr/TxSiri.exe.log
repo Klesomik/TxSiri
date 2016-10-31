@@ -1,0 +1,45 @@
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 105], Instance: 0x0000000000540598 (64-bit), Flags: CMdREt, Thread: 0x1BAC (Main), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Трассировка стека:
+
+# 0 0x000000000040A777 in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+# 1 0x000000000040A995 in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+# 2 0x000007FEFD991920 in C:\windows\system32\msvcrt.dll!raise
+# 3 0x000007FEFD9953A5 in C:\windows\system32\msvcrt.dll!abort
+# 4 0x0000000000427DDD in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+# 5 0x0000000000427E92 in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+# 6 0x000000000041359C in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+# 7 0x0000000000413A7E in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+# 8 0x0000000000413BCF in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+# 9 0x0000000000413B28 in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+#10 0x00000000004013E8 in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+#11 0x0000000000401526 in C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe!(??)
+#12 0x0000000076FA59C8 in C:\windows\system32\kernel32.dll!BaseThreadInitThunk
+#13 0x00000000771DA2DC in C:\windows\SYSTEM32\ntdll.dll!RtlUserThreadStart
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library) - TXLib [Ver: 00173a, Rev: 105]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TXLib.h
+Compiled:	Oct 31 2016 11:52:01, DEBUG, GNU g++ 5.3.0, std=201402L
+Started:	Oct 31 2016 11:52:06
+
+Run file:	C:\Users\Artem\Documents\GitHub\TxSiri\Scr\TxSiri.exe
+Directory:	C:\Users\Artem\Documents\GitHub\TxSiri\Scr
+
+--------------------------------------------------
