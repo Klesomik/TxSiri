@@ -7,7 +7,7 @@
 void Start ();
 void Finish ();
 
-void Work (Window &tx_version, const char name[] = "..//Materials//Data.txt");
+void Work (Window &tx_version, const char name[] = "Materials//Data.txt");
 int  MainLoop (Node <string>* root, const char name[]);
 void DeleteBase (Node <string>* root);
 void Advertisement (bool hosting);
