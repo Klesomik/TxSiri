@@ -1,9 +1,9 @@
 #include "HelpSiri.h"
 
-void WriteAboutObject (Node <string>* root);
-void WriteAboutTwoObjects (Node <string>* root);
+void WriteAboutObject (Node* root);
+void WriteAboutTwoObjects (Node* root);
 
-void WriteAboutObject (Node <string>* root)
+void WriteAboutObject (Node* root)
 {
     $c const char* name = printsScan ("Скажите мне название объекта: "); $d
 
@@ -56,7 +56,7 @@ void WriteAboutObject (Node <string>* root)
     txSleep (500);
 }
 
-void WriteAboutTwoObjects (Node <string>* root)
+void WriteAboutTwoObjects (Node* root)
 {
     char petya[NAME_SIZE] = "";
     vector <string> pathPetya;

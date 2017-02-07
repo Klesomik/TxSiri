@@ -1,10 +1,13 @@
-#include "DotDump.h"
+#ifndef Node_h
 
-template <typename Data_T>
+#define Node_h
+
+#include "Tools.h"
+
 class Node
 {
     private:
-        Data_T key_;
+        string key_;
 
         Node *parent_, *left_, *right_;
 
@@ -15,40 +18,35 @@ class Node
         Node& operator = (const Node& from);
 
     public:
-        Node (const Data_T value);
+        Node (const string& value);
         ~Node ();
 
-        Node* insertLeft (const Data_T value);
-        Node* insertRight (const Data_T value);
+        Node* insertLeft (const string& value);
+        Node* insertRight (const string& value);
 
-        Node* insertLeft (Node <Data_T>* example);
-        Node* insertRight (Node <Data_T>* example);
+        Node* insertLeft (Node* example);
+        Node* insertRight (Node* example);
 
         void eraseNode ();
         void eraseSubTree ();
 
-        void dump ();
-        void dumpAll ();
-        void dump_file ();
-        void dumpAll_file ();
-
         bool ok ();
+        void dump (FILE* out = stdout);
 
         Node* getFirst (Node* example);
 
-              Data_T& key ();
-              Node*& right ();
-              Node*& left ();
-              Node*& parent ();
+        const string& key () const;
+        Node* right () const;
+        Node* left () const;
+        Node* parent () const;
 
-        const Data_T& key ()  const;
-              Node* parent () const;
-              Node* right ()  const;
-              Node* left ()   const;
+        string& key ();
+        Node*& right ();
+        Node*& left ();
+        Node*& parent ();
 };
 
-template <typename Data_T>
-Node <Data_T> :: Node(const Data_T value):
+Node :: Node(const string& value):
     key_   (value),
     parent_  (nullptr),
     left_  (nullptr),
@@ -56,8 +54,8 @@ Node <Data_T> :: Node(const Data_T value):
     alive_ (true)
     { /*DUMP (4, "Constructor\n");*/ }
 
-template <typename Data_T>
-Node <Data_T> :: ~Node()
+
+Node :: ~Node()
 {
     if(!alive_)
         return;
@@ -71,24 +69,24 @@ Node <Data_T> :: ~Node()
            right_ = nullptr;
 }
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: insertLeft(const Data_T value)
+
+Node* Node :: insertLeft(const string& value)
 {
     Node* add_element = new Node(value);
 
     return insertLeft (add_element);
 }
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: insertRight(const Data_T value)
+
+Node* Node :: insertRight(const string& value)
 {
     Node* add_element = new Node(value);
 
     return insertRight (add_element);
 }
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: insertLeft(Node <Data_T>* example)
+
+Node* Node :: insertLeft(Node* example)
 {
     left_ = example;
             example -> parent_ = this;
@@ -96,8 +94,8 @@ Node <Data_T>* Node <Data_T> :: insertLeft(Node <Data_T>* example)
     return example;
 }
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: insertRight(Node <Data_T>* example)
+
+Node* Node :: insertRight(Node * example)
 {
     right_ = example;
              example -> parent_ = this;
@@ -105,8 +103,8 @@ Node <Data_T>* Node <Data_T> :: insertRight(Node <Data_T>* example)
     return example;
 }
 
-template <typename Data_T>
-void Node <Data_T> :: eraseNode()
+
+void Node :: eraseNode()
 {
     if(left_)
         left_ -> parent_ = parent_;
@@ -114,47 +112,22 @@ void Node <Data_T> :: eraseNode()
     if(right_)
         right_ -> parent_ = parent_;
 
-    key_    = POISON;
-    parent_ = POISON;
-    left_   = POISON;
-    right_  = POISON;
+    //key_    = POISON;
+    //parent_ = POISON;
+    //left_   = POISON;
+    //right_  = POISON;
 }
 
-template <typename Data_T>
-void Node <Data_T> :: eraseSubTree()
+
+void Node :: eraseSubTree()
 {
     delete this;
 }
 
-template <typename Data_T>
-void Node <Data_T> :: dump()
+
+bool Node :: ok()
 {
-    printf("\n=============dump=============\n");
-
-    printf("Node (%s) [this = %p][", ok()? "ok" : "ERROR", this);
-    print(key_);
-    printf("]\n");
-
-    printf("    prev = %p;\n", parent_);
-    printf("    left = %p; right = %p;\n", left_, right_);
-
-    printf("==============================\n\n");
-}
-
-template <typename Data_T>
-void Node <Data_T> :: dump_file()
-{
-    fprintf(__DUMP__.dump_, "\n=============dump=============\n");
-
-    fprintf(__DUMP__.dump_, "Node (%s) [%p]\n", ok()? "ok" : "ERROR", this);
-
-    fprintf(__DUMP__.dump_, "==============================\n\n");
-}
-
-template <typename Data_T>
-bool Node <Data_T> :: ok()
-{
-    if(this == nullptr || (this == (Node <Data_T>*) POISON))
+    if(this == nullptr || (this == (Node *) POISON))
         return false;
 
     if(IsPoison(parent_) || IsPoison(left_) || IsPoison(right_))
@@ -190,8 +163,23 @@ bool Node <Data_T> :: ok()
     return true;
 }
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: getFirst(Node* example)
+
+void Node :: dump(FILE* out /* = stdout */)
+{
+    fprintf(out, "\n=============dump=============\n");
+
+    fprintf(out, "Node (%s) [this = %p][", ok()? "ok" : "ERROR", this);
+    fprint(out, key_);
+    fprintf(out, "]\n");
+
+    fprintf(out, "    prev = %p;\n", parent_);
+    fprintf(out, "    left = %p; right = %p;\n", left_, right_);
+
+    fprintf(out, "==============================\n\n");
+}
+
+
+Node* Node :: getFirst(Node* example)
 {
     Node* ptr_search = example;
 
@@ -201,50 +189,50 @@ Node <Data_T>* Node <Data_T> :: getFirst(Node* example)
     return ptr_search;
 }
 
-template <typename Data_T>
-Data_T& Node <Data_T> :: key()
+
+const string& Node :: key() const
 {
     return key_;
 }
 
-template <typename Data_T>
-Node <Data_T>*& Node <Data_T> :: right()
+
+Node* Node :: right() const
 {
     return right_;
 }
 
-template <typename Data_T>
-Node <Data_T>*& Node <Data_T> :: left()
+
+Node* Node :: left() const
 {
     return left_;
 }
 
-template <typename Data_T>
-Node <Data_T>*& Node <Data_T> :: parent()
+
+Node* Node :: parent() const
 {
     return parent_;
 }
 
-template <typename Data_T>
-const Data_T& Node <Data_T> :: key()      const
+
+string& Node :: key()
 {
     return key_;
 }
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: parent()  const
-{
-    return parent_;
-}
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: right()   const
+Node*& Node :: right()
 {
     return right_;
 }
 
-template <typename Data_T>
-Node <Data_T>* Node <Data_T> :: left()    const
+Node*& Node :: left()
 {
     return left_;
 }
+
+Node*& Node :: parent()
+{
+    return parent_;
+}
+
+#endif /* Node_h */

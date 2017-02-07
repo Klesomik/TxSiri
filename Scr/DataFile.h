@@ -14,8 +14,8 @@ class DataFile
 
         ~DataFile ();
 
-        Node <string>* read ();
-        void write (Node <string>* current);
+        Node* read ();
+        void write (Node* current);
 };
 
 DataFile :: DataFile (const char name[], const char mode[]):
@@ -31,7 +31,7 @@ DataFile :: ~DataFile ()
     binaryTree_ = nullptr;
 }
 
-Node <string>* DataFile :: read ()
+Node* DataFile :: read ()
 {
     char sym = -1;
     if (fscanf (binaryTree_, " %c", &sym) != 1 || (sym != '(' && sym != '*'))
@@ -52,7 +52,7 @@ Node <string>* DataFile :: read ()
         return nullptr;
     }
 
-    Node <string>* curr = new Node <string> (key);
+    Node* curr = new Node (key);
 
     curr -> left ()  = read ();
     if (curr -> left ())
@@ -72,7 +72,7 @@ Node <string>* DataFile :: read ()
     return curr;
 }
 
-void DataFile :: write (Node <string>* current)
+void DataFile :: write (Node* current)
 {
     if (!current)
     {

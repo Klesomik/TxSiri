@@ -8,10 +8,10 @@ void Start ();
 void Finish ();
 
 void Work (Window &tx_version, const char name[] = "Materials//Data.txt");
-int  MainLoop (Node <string>* root, const char name[]);
-void DeleteBase (Node <string>* root);
+int  MainLoop (Node* root, const char name[]);
+void DeleteBase (Node* root);
 void Advertisement (bool hosting);
-void SiriThink (Node <string>* root);
+void SiriThink (Node* root);
 
 int main()
 {
@@ -48,7 +48,7 @@ void Finish ()
 void Work (Window &tx_version, const char name[])
 {
     printf ("Загрузка...\n");
-    Node <string>* root = tx_version.InIt (name);
+    Node* root = tx_version.InIt (name);
     printf ("Загрузка завершена.\n\n");
 
     tx_version.HelloSiri ();
@@ -58,7 +58,7 @@ void Work (Window &tx_version, const char name[])
     $c prints ("%s", buySiri[x % 4]);
 }
 
-int MainLoop (Node <string>* root, const char name[])
+int MainLoop (Node* root, const char name[])
 {
     bool hosting = true;
 
@@ -73,7 +73,7 @@ int MainLoop (Node <string>* root, const char name[])
 
         else if (stricmp (cmd, "Дать определение")  == 0 || stricmp (cmd, "Д") == 0) WriteAboutObject (root);
         else if (stricmp (cmd, "Сравнить объекты")  == 0 || stricmp (cmd, "С") == 0) WriteAboutTwoObjects (root);
-        else if (stricmp (cmd, "Показать дерево")   == 0 || stricmp (cmd, "П") == 0) { $c prints ("%s", treeSiri[i % 4]); $d DotDump <string> finish ("Tree.dot", "Tree.jpg", "jpg", root); }
+        else if (stricmp (cmd, "Показать дерево")   == 0 || stricmp (cmd, "П") == 0) { $c prints ("%s", treeSiri[i % 4]); $d DotDump finish ("Tree.dot", "Tree.jpg", "jpg", root); }
         else if (stricmp (cmd, "Удалить базу")      == 0 || stricmp (cmd, "У") == 0) DeleteBase (root);
         else if (stricmp (cmd, "Загадать объект\n") == 0 || stricmp (cmd, "З") == 0) SiriThink (root);
         else if (stricmp (cmd, " ")   == 0) continue;
@@ -94,7 +94,7 @@ int MainLoop (Node <string>* root, const char name[])
     }
 }
 
-void DeleteBase (Node <string>* root)
+void DeleteBase (Node* root)
 {
     $c; const char* ans = printsScan ("Вы действительно хотите удалить все мои знания? "); $d;
 
@@ -133,13 +133,13 @@ void Advertisement (bool hosting)
     }
 }
 
-void SiriThink (Node <string>* root)
+void SiriThink (Node* root)
 {
     srand (time (nullptr));
 
     string buffer;
 
-    Node <string>* curr = root;
+    Node* curr = root;
 
     while (curr -> left () && curr -> right ())
     {

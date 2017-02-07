@@ -7,7 +7,7 @@ struct Window
     Window ();
 
     void HelloSiri ();
-    Node <string>* InIt (const char name[] = "TreeFile//Data.txt");
+    Node* InIt (const char name[] = "TreeFile//Data.txt");
 };
 
 Window :: Window():
@@ -32,11 +32,11 @@ void Window :: HelloSiri ()
     txSleep (250);
 }
 
-Node <string>* Window :: InIt (const char name[])
+Node* Window :: InIt (const char name[])
 {
     DataFile rd (name, "r");
 
-    Node <string>* root = rd.read ();
+    Node* root = rd.read ();
 
     return root;
 }

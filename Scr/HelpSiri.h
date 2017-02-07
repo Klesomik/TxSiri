@@ -1,21 +1,22 @@
-#include "Dec.h"
+#ifndef HelpSiri_h
 
-void FindPath (Node <string>* current, vector <string> &path, string object, bool need);
-bool Choose   (Node <string>* current);
-void prints (const char param_print[], ...);
-const char* printsScan (const char param_print[], ...);
-const char* printScan (const char param_print[], ...);
-void Swap (Node <string>* current, Node <string>* ask);
-bool Direction (Node <string>* current);
-bool ScanName (vector <string> &pathPetya, Node <string>* root, char petya[NAME_SIZE], const int count, bool write);
-void IWantNew (Node <string>* root);
-void Guess (Node <string>* root);
+#define HelpSiri_h
 
-void FindPath (Node <string>* current, vector <string> &path, string object, bool need)
+#include "DotDump.h"
+
+void FindPath (Node* current, vector <string> &path, string object, bool need);
+bool Choose   (Node* current);
+void Swap (Node* current, Node* ask);
+bool Direction (Node* current);
+bool ScanName (vector <string> &pathPetya, Node* root, char petya[NAME_SIZE], const int count, bool write);
+void IWantNew (Node* root);
+void Guess (Node* root);
+
+void FindPath (Node* current, vector <string> &path, string object, bool need)
 {
     if (stricmp (current -> key ().c_str (), object.c_str ()) == 0)
     {
-        Node <string>* upper = current;
+        Node* upper = current;
 
         if (need)
         {
@@ -59,7 +60,7 @@ void FindPath (Node <string>* current, vector <string> &path, string object, boo
     else return;
 }
 
-bool Choose (Node <string>* current)
+bool Choose (Node* current)
 {
     $c prints ("Это %s?\n", current -> key ().c_str()); $d
 
@@ -79,85 +80,19 @@ bool Choose (Node <string>* current)
     }
 }
 
-void prints (const char param_print[], ...)
-{
-    va_list list;
-    va_start (list, param_print);
-
-    char buff[512] = "";
-
-    vsprintf (buff, param_print, list);
-
-    printf ("%s", buff);
-
-    SS (buff);
-
-    va_end (list);
-}
-
-const char* printsScan (const char param_print[], ...)
-{
-    va_list list;
-    va_start (list, param_print);
-
-    char buff[512] = "";
-
-    vsprintf (buff, param_print, list);
-
-    $c printf ("%s", buff); $d
-
-    SS (buff);
-
-    va_end (list);
-
-    fflush (stdin);
-
-    static char scan_data[CMD_SIZE] = "";
-    fgets (scan_data, sizeof (scan_data) - 1, stdin);
-
-    int len = strlen (scan_data) - 1;
-    if (len >= 1 && scan_data[len] == '\n') scan_data[len] = 0;
-
-    return scan_data;
-}
-
-const char* printScan (const char param_print[], ...)
-{
-    va_list list;
-    va_start (list, param_print);
-
-    $c; vprintf (param_print, list); $d;
-
-    va_end (list);
-
-    fflush (stdin);
-
-    static char scan_data[CMD_SIZE] = "";
-    fgets (scan_data, sizeof (scan_data) - 1, stdin);
-
-    int len = strlen (scan_data) - 1;
-    if (len >= 1 && scan_data[len] == '\n') scan_data[len] = 0;
-
-    return scan_data;
-}
-
-void Swap (Node <string>* current, Node <string>* ask)
+void Swap (Node* current, Node* ask)
 {
     string tmp = current -> key ();
                  current -> key () = ask -> key ();
                                      ask -> key () = tmp;
 }
 
-bool Direction (Node <string>* current)
+bool Direction (Node* current)
 {
-    if (current -> parent () -> right () == current)
-        return true;
-
-    else
-        return false;
+    return (current -> parent () -> right () == current);
 }
 
-bool ScanName (vector <string> &pathPetya, Node <string>* root, char petya[NAME_SIZE], const int count, bool write)
+bool ScanName (vector <string> &pathPetya, Node* root, char petya[NAME_SIZE], const int count, bool write)
 {
     $c
     if (count != 0) strcpy (petya, printsScan ("Скажите мне название %d-го объекта: ", count));
@@ -183,7 +118,7 @@ bool ScanName (vector <string> &pathPetya, Node <string>* root, char petya[NAME_
     return true;
 }
 
-void IWantNew (Node <string>* root)
+void IWantNew (Node* root)
 {
     while (true)
     {
@@ -197,9 +132,9 @@ void IWantNew (Node <string>* root)
     }
 }
 
-void Guess (Node <string>* root)
+void Guess (Node* root)
 {
-    Node <string>* current = root;
+    Node* current = root;
 
     while (true)
     {
@@ -242,7 +177,7 @@ void Guess (Node <string>* root)
 
                 assert (answer);
 
-                Node <string>* ask = current -> insertLeft (answer);
+                Node* ask = current -> insertLeft (answer);
 
                 $c prints ("Я запомнила, теперь вы меня не обманете\n"); $d
 
@@ -253,3 +188,5 @@ void Guess (Node <string>* root)
         }
     }
 }
+
+#endif /* HelpSiri_h */

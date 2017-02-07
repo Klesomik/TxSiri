@@ -1,12 +1,12 @@
+#ifndef DotDump_h
+
+#define DotDump_h
+
+#include "Node.h"
 #include "Dotter-fixed.h"
-#include "DumpKey.h"
 
 static const int SIZE_NAME = 640;
 
-template <typename Data_T>
-class Node;
-
-template <typename Data_T>
 class DotDump
 {
     private:
@@ -14,7 +14,7 @@ class DotDump
         const std::string photo;
         const std::string type;
 
-        const Node <Data_T>* root;
+        const Node* root;
 
         DotDump (const DotDump& from);
 
@@ -25,14 +25,13 @@ class DotDump
         void CreateDotFile ();
         void CloseDotFile ();
 
-        void MakeTree (const Node <Data_T>* node, int number);
+        void MakeTree (const Node* node, int number);
 
     public:
-        DotDump (const string name_file, const string name_photo, const string name_type, const Node <Data_T>* first);
+        DotDump (const string name_file, const string name_photo, const string name_type, const Node* first);
 };
 
-template <typename Data_T>
-DotDump <Data_T> :: DotDump (const string name_file, const string name_photo, const string name_type, const Node <Data_T>* first):
+DotDump :: DotDump (const string name_file, const string name_photo, const string name_type, const Node* first):
     title (name_file),
     photo (name_photo),
     type  (name_type),
@@ -41,8 +40,7 @@ DotDump <Data_T> :: DotDump (const string name_file, const string name_photo, co
         DotVersion ();
     }
 
-template <typename Data_T>
-void DotDump <Data_T> :: DotVersion ()
+void DotDump :: DotVersion ()
 {
     CreateDotFile ();
 
@@ -51,24 +49,21 @@ void DotDump <Data_T> :: DotVersion ()
     CloseDotFile ();
 }
 
-template <typename Data_T>
-void DotDump <Data_T> :: CreateDotFile ()
+void DotDump :: CreateDotFile ()
 {
     dtBegin (title.c_str());
 
     dtNodeStyle ().shape ("box");
 }
 
-template <typename Data_T>
-void DotDump <Data_T> :: CloseDotFile ()
+void DotDump :: CloseDotFile ()
 {
     dtEnd ();
 
     dtRender (title.c_str(), photo.c_str (), type.c_str ());
 }
 
-template <typename Data_T>
-void DotDump <Data_T> :: MakeTree (const Node <Data_T>* node, int number)
+void DotDump :: MakeTree (const Node* node, int number)
 {
     static int count = 0;
                count++;
@@ -76,15 +71,18 @@ void DotDump <Data_T> :: MakeTree (const Node <Data_T>* node, int number)
     int cbPrint = 0;
     char node_str[SIZE_NAME] = "";
 
-        //cbPrint += sprintf (node_str + cbPrint, "count = %d\n ", count);
-
         string str = node -> key ();
 
         cbPrint += sprint  (node_str + cbPrint,                   str);
-        /*cbPrint += sprintf (node_str + cbPrint, "parent = %p\n ", node -> parent ());
+
+        #ifdef MORE_INFORMATION
+
+        cbPrint += sprintf (node_str + cbPrint, "parent = %p\n ", node -> parent ());
         cbPrint += sprintf (node_str + cbPrint, "this = %p\n",    node);
         cbPrint += sprintf (node_str + cbPrint, "left = %p\n ",   node -> left ());
-        cbPrint += sprintf (node_str + cbPrint, "right = %p\n ",  node -> right ());*/
+        cbPrint += sprintf (node_str + cbPrint, "right = %p\n ",  node -> right ());
+
+        #endif /* MORE_INFORMATION */
 
     dtNode (count, node_str);
 
@@ -95,3 +93,5 @@ void DotDump <Data_T> :: MakeTree (const Node <Data_T>* node, int number)
     if (node ->  left ()) MakeTree (node -> left (),  copy_count);
     if (node -> right ()) MakeTree (node -> right (), copy_count);
 }
+
+#endif /* DotDump_h */
