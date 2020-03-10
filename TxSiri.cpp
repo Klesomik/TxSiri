@@ -17,7 +17,7 @@ int main()
 {
     Start ();
 
-    PrintSystem ("Введите файл для чтения/записи: ");
+    PrintSystem ("Р’РІРµРґРёС‚Рµ С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ/Р·Р°РїРёСЃРё: ");
 
     std::string name;
     std::getline (std::cin, name, '\n');
@@ -70,15 +70,15 @@ void Finish ()
 
 void Work (const char name[])
 {
-    PrintSystem ("Загрузка...\n");
+    PrintSystem ("Р—Р°РіСЂСѓР·РєР°...\n");
     Node* root = BuildTree (name);
-    PrintSystem ("Загрузка завершена.\n\n");
+    PrintSystem ("Р—Р°РіСЂСѓР·РєР° Р·Р°РІРµСЂС€РµРЅР°.\n\n");
 
     txSleep (250);
 
-    PrintSiri ("Здравствуйте, меня зовут Siri.\n"
-               "Вы можете загадать кого-либо, а я отгадаю его.\n"
-               "Вперёд захватывать мир!\n");
+    PrintSiri ("Р—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ, РјРµРЅСЏ Р·РѕРІСѓС‚ Siri.\n"
+               "Р’С‹ РјРѕР¶РµС‚Рµ Р·Р°РіР°РґР°С‚СЊ РєРѕРіРѕ-Р»РёР±Рѕ, Р° СЏ РѕС‚РіР°РґР°СЋ РµРіРѕ.\n"
+               "Р’РїРµСЂС‘Рґ Р·Р°С…РІР°С‚С‹РІР°С‚СЊ РјРёСЂ!\n");
 
     txSleep (250);
 
@@ -96,18 +96,18 @@ int MainLoop (Node* root, const char name[])
         if (i != 0 && i % 10 == 0)
             Advertisement (hosting);
 
-        PrintSystem ("\nЧто Вы желаете: [О]тгадывать, [Д]ать определение, [С]равнить объекты\n"
-                     "[З]агадать объект, [П]оказать дерево, [У]далить базу, [В]ыйти с сохранением или [б]ез него?\n");
+        PrintSystem ("\nР§С‚Рѕ Р’С‹ Р¶РµР»Р°РµС‚Рµ: [Рћ]С‚РіР°РґС‹РІР°С‚СЊ, [Р”]Р°С‚СЊ РѕРїСЂРµРґРµР»РµРЅРёРµ, [РЎ]СЂР°РІРЅРёС‚СЊ РѕР±СЉРµРєС‚С‹\n"
+                     "[Р—]Р°РіР°РґР°С‚СЊ РѕР±СЉРµРєС‚, [Рџ]РѕРєР°Р·Р°С‚СЊ РґРµСЂРµРІРѕ, [РЈ]РґР°Р»РёС‚СЊ Р±Р°Р·Сѓ, [Р’]С‹Р№С‚Рё СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј РёР»Рё [Р±]РµР· РЅРµРіРѕ?\n");
 
         std::string cmd;
         std::getline (std::cin, cmd, '\n');
 
-        if      (Compare (cmd, "Отгадывать")       || Compare (cmd, "О")) Guess (root);
-        else if (Compare (cmd, "Дать определение") || Compare (cmd, "Д")) WriteAboutObject (root);
-        else if (Compare (cmd, "Сравнить объекты") || Compare (cmd, "С")) WriteAboutTwoObjects (root);
-        else if (Compare (cmd, "Показать дерево")  || Compare (cmd, "П")) { PrintSiri ("%s", treeSiri[i % 4]); RenderTree (root, "Tree.dot", "Tree.jpg", true); }
-        else if (Compare (cmd, "Удалить базу")     || Compare (cmd, "У")) DeleteBase (root);
-        else if (Compare (cmd, "Загадать объект")  || Compare (cmd, "З")) SiriThink (root);
+        if      (Compare (cmd, "РћС‚РіР°РґС‹РІР°С‚СЊ")       || Compare (cmd, "Рћ")) Guess (root);
+        else if (Compare (cmd, "Р”Р°С‚СЊ РѕРїСЂРµРґРµР»РµРЅРёРµ") || Compare (cmd, "Р”")) WriteAboutObject (root);
+        else if (Compare (cmd, "РЎСЂР°РІРЅРёС‚СЊ РѕР±СЉРµРєС‚С‹") || Compare (cmd, "РЎ")) WriteAboutTwoObjects (root);
+        else if (Compare (cmd, "РџРѕРєР°Р·Р°С‚СЊ РґРµСЂРµРІРѕ")  || Compare (cmd, "Рџ")) { PrintSiri ("%s", treeSiri[i % 4]); RenderTree (root, "Tree.dot", "Tree.jpg", true); }
+        else if (Compare (cmd, "РЈРґР°Р»РёС‚СЊ Р±Р°Р·Сѓ")     || Compare (cmd, "РЈ")) DeleteBase (root);
+        else if (Compare (cmd, "Р—Р°РіР°РґР°С‚СЊ РѕР±СЉРµРєС‚")  || Compare (cmd, "Р—")) SiriThink (root);
 
         else if (Compare (cmd, " ") || Compare (cmd, "\n")) continue;
 
@@ -115,10 +115,10 @@ int MainLoop (Node* root, const char name[])
         else if (Compare (cmd, "j") || Compare (cmd, "l") || Compare (cmd, "c") || Compare (cmd, "g") || Compare (cmd, "d") || Compare (cmd, ","))
             PrintSiri ("%s", rusSiri[i % 4]);
 
-        else if (Compare (cmd, "В")) { std::ofstream out (name); root->write (out); return i; }
-        else if (Compare (cmd, "Б")) return i;
+        else if (Compare (cmd, "Р’")) { std::ofstream out (name); root->write (out); return i; }
+        else if (Compare (cmd, "Р‘")) return i;
 
-        else { PrintSiri ("Я вас не понимаю. Введите команду, понятную мне:\n"); }
+        else { PrintSiri ("РЇ РІР°СЃ РЅРµ РїРѕРЅРёРјР°СЋ. Р’РІРµРґРёС‚Рµ РєРѕРјР°РЅРґСѓ, РїРѕРЅСЏС‚РЅСѓСЋ РјРЅРµ:\n"); }
     }
 }
 
@@ -126,11 +126,11 @@ void Advertisement (bool hosting)
 {
     if (hosting)
     {
-        PrintSystem ("Реклама:\n"
-                     "Сайт методики довузовского обучения программированию и проектной деятельности в информатике: http://ded32.net.ru/\n"
-                     "Автор: Дединский Илья Рудольфович\n");
+        PrintSystem ("Р РµРєР»Р°РјР°:\n"
+                     "РЎР°Р№С‚ РјРµС‚РѕРґРёРєРё РґРѕРІСѓР·РѕРІСЃРєРѕРіРѕ РѕР±СѓС‡РµРЅРёСЏ РїСЂРѕРіСЂР°РјРјРёСЂРѕРІР°РЅРёСЋ Рё РїСЂРѕРµРєС‚РЅРѕР№ РґРµСЏС‚РµР»СЊРЅРѕСЃС‚Рё РІ РёРЅС„РѕСЂРјР°С‚РёРєРµ: http://ded32.net.ru/\n"
+                     "РђРІС‚РѕСЂ: Р”РµРґРёРЅСЃРєРёР№ РР»СЊСЏ Р СѓРґРѕР»СЊС„РѕРІРёС‡\n");
 
-        PrintSiri ("Чтобы отключить рекламу скажите мне что-нибудь хорошее\n"
-                   "Например: Сири, ты милая ^_^\n");
+        PrintSiri ("Р§С‚РѕР±С‹ РѕС‚РєР»СЋС‡РёС‚СЊ СЂРµРєР»Р°РјСѓ СЃРєР°Р¶РёС‚Рµ РјРЅРµ С‡С‚Рѕ-РЅРёР±СѓРґСЊ С…РѕСЂРѕС€РµРµ\n"
+                   "РќР°РїСЂРёРјРµСЂ: РЎРёСЂРё, С‚С‹ РјРёР»Р°СЏ ^_^\n");
     }
 }

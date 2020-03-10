@@ -23,7 +23,7 @@ void FindPath (Node* current, std::vector <std::string>& path, const std::string
         Node* upper = current;
 
         if (need)
-            PrintSiri ("%s это: ", upper->key ().c_str ());
+            PrintSiri ("%s СЌС‚Рѕ: ", upper->key ().c_str ());
 
         while (upper->parent ())
         {
@@ -31,7 +31,7 @@ void FindPath (Node* current, std::vector <std::string>& path, const std::string
             {
                 upper = upper->parent ();
 
-                path.push_back ("не " + upper->key ());
+                path.push_back ("РЅРµ " + upper->key ());
             }
 
             else
@@ -61,15 +61,15 @@ void FindPath (Node* current, std::vector <std::string>& path, const std::string
 
 bool Choose (Node* current)
 {
-    PrintSiri ("Это %s?\n", current->key ().c_str());
+    PrintSiri ("Р­С‚Рѕ %s?\n", current->key ().c_str());
 
     for (int i = 0;; i++)
     {
         std::string answer;
         std::getline (std::cin, answer, '\n');
 
-        if (Compare (answer, "Да")  || Compare (answer, "Д")) return true;
-        if (Compare (answer, "Нет") || Compare (answer, "Н")) return false;
+        if (Compare (answer, "Р”Р°")  || Compare (answer, "Р”")) return true;
+        if (Compare (answer, "РќРµС‚") || Compare (answer, "Рќ")) return false;
 
         for (int j = 0; j < 5; j++)
         {
@@ -90,8 +90,8 @@ bool Direction (Node* current)
 
 bool ScanName (std::vector <std::string>& pathPetya, Node* root, std::string& petya, const int count, bool write)
 {
-    if (count != 0) PrintSiri ("Скажите мне название %d-го объекта: ", count);
-    else            PrintSiri ("Скажите мне название объекта: ");
+    if (count != 0) PrintSiri ("РЎРєР°Р¶РёС‚Рµ РјРЅРµ РЅР°Р·РІР°РЅРёРµ %d-РіРѕ РѕР±СЉРµРєС‚Р°: ", count);
+    else            PrintSiri ("РЎРєР°Р¶РёС‚Рµ РјРЅРµ РЅР°Р·РІР°РЅРёРµ РѕР±СЉРµРєС‚Р°: ");
 
     std::getline (std::cin, petya, '\n');
 
@@ -101,7 +101,7 @@ bool ScanName (std::vector <std::string>& pathPetya, Node* root, std::string& pe
 
     if (nextAsk)
     {
-        PrintSiri ("Не обманывайте меня. Я не знаю объекта %s. Хотите меня научить?\n", petya.c_str ());
+        PrintSiri ("РќРµ РѕР±РјР°РЅС‹РІР°Р№С‚Рµ РјРµРЅСЏ. РЇ РЅРµ Р·РЅР°СЋ РѕР±СЉРµРєС‚Р° %s. РҐРѕС‚РёС‚Рµ РјРµРЅСЏ РЅР°СѓС‡РёС‚СЊ?\n", petya.c_str ());
 
         IWantNew (root);
 
@@ -122,10 +122,10 @@ void IWantNew (Node* root)
         std::string answer;
         std::getline (std::cin, answer, '\n');
 
-        if (Compare (answer, "Да")  || Compare (answer, "Д")) { Guess (root); break; }
-        if (Compare (answer, "Нет") || Compare (answer, "Н")) break;
+        if (Compare (answer, "Р”Р°")  || Compare (answer, "Р”")) { Guess (root); break; }
+        if (Compare (answer, "РќРµС‚") || Compare (answer, "Рќ")) break;
 
-        PrintSiri ("Я не понимаю. Введите \"Да\" или \"Нет\":\n");
+        PrintSiri ("РЇ РЅРµ РїРѕРЅРёРјР°СЋ. Р’РІРµРґРёС‚Рµ \"Р”Р°\" РёР»Рё \"РќРµС‚\":\n");
     }
 }
 
@@ -142,7 +142,7 @@ void Guess (Node* root)
 
             else
             {
-                PrintSiri ("Я же говорила!\n");
+                PrintSiri ("РЇ Р¶Рµ РіРѕРІРѕСЂРёР»Р°!\n");
 
                 break;
             }
@@ -155,7 +155,7 @@ void Guess (Node* root)
 
             else
             {
-                PrintSiri ("А кто же это был?\n");
+                PrintSiri ("Рђ РєС‚Рѕ Р¶Рµ СЌС‚Рѕ Р±С‹Р»?\n");
 
                 std::string name;
                 std::getline (std::cin, name, '\n');
@@ -164,14 +164,14 @@ void Guess (Node* root)
 
                 std::string answer;
 
-                PrintSiri ("А чем %s отличается от %s?\n", name.c_str (), current->key ().c_str ());
-                PrintSiri ("Он(а)...");
+                PrintSiri ("Рђ С‡РµРј %s РѕС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ %s?\n", name.c_str (), current->key ().c_str ());
+                PrintSiri ("РћРЅ(Р°)...");
 
                 std::getline (std::cin, answer, '\n');
 
                 Node* ask = current->insertLeft (answer);
 
-                PrintSiri ("Я запомнила, теперь вы меня не обманете\n");
+                PrintSiri ("РЇ Р·Р°РїРѕРјРЅРёР»Р°, С‚РµРїРµСЂСЊ РІС‹ РјРµРЅСЏ РЅРµ РѕР±РјР°РЅРµС‚Рµ\n");
 
                 std::swap (current->key (), ask->key ());
 
@@ -183,7 +183,7 @@ void Guess (Node* root)
 
 void WriteAboutObject (Node* root)
 {
-    PrintSiri ("Скажите мне название объекта: ");
+    PrintSiri ("РЎРєР°Р¶РёС‚Рµ РјРЅРµ РЅР°Р·РІР°РЅРёРµ РѕР±СЉРµРєС‚Р°: ");
 
     std::string name;
     std::getline (std::cin, name, '\n');
@@ -194,7 +194,7 @@ void WriteAboutObject (Node* root)
 
     if (nextAsk)
     {
-        PrintSiri ("Не обманывайте меня. Я не знаю объекта %s. Хотите меня научить?\n", name.c_str ());
+        PrintSiri ("РќРµ РѕР±РјР°РЅС‹РІР°Р№С‚Рµ РјРµРЅСЏ. РЇ РЅРµ Р·РЅР°СЋ РѕР±СЉРµРєС‚Р° %s. РҐРѕС‚РёС‚Рµ РјРµРЅСЏ РЅР°СѓС‡РёС‚СЊ?\n", name.c_str ());
 
         IWantNew (root);
 
@@ -225,7 +225,7 @@ void WriteAboutObject (Node* root)
 
         else if (i == 0)
         {
-            buffer += "и ";
+            buffer += "Рё ";
             buffer += path[i].c_str ();
             buffer += ".\n";
         }
@@ -248,8 +248,8 @@ void WriteAboutTwoObjects (Node* root)
 
     std::string buffer;
 
-    if (pathPetya[0] == pathVasya[0]) buffer += "Схожи тем, что они оба: ";
-    else buffer += "У объектов нет сходств, ";
+    if (pathPetya[0] == pathVasya[0]) buffer += "РЎС…РѕР¶Рё С‚РµРј, С‡С‚Рѕ РѕРЅРё РѕР±Р°: ";
+    else buffer += "РЈ РѕР±СЉРµРєС‚РѕРІ РЅРµС‚ СЃС…РѕРґСЃС‚РІ, ";
 
     for (size_t i = 0; i < std::max (pathPetya.size (), pathVasya.size ()); i++)
     {
@@ -261,7 +261,7 @@ void WriteAboutTwoObjects (Node* root)
 
         else
         {
-            buffer += "но ";
+            buffer += "РЅРѕ ";
             buffer += petya;
             buffer += ": ";
 
@@ -271,7 +271,7 @@ void WriteAboutTwoObjects (Node* root)
                 buffer += ", ";
             }
 
-            buffer += "а ";
+            buffer += "Р° ";
             buffer += vasya;
             buffer += ": ";
 
@@ -299,14 +299,14 @@ void WriteAboutTwoObjects (Node* root)
 
 void DeleteBase (Node* root)
 {
-    PrintSiri ("Вы действительно хотите удалить все мои знания? ");
+    PrintSiri ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РІСЃРµ РјРѕРё Р·РЅР°РЅРёСЏ? ");
 
     while (true)
     {
         std::string ans;
         std::getline (std::cin, ans, '\n');
 
-        if (Compare (ans, "Да") || Compare (ans, "Д"))
+        if (Compare (ans, "Р”Р°") || Compare (ans, "Р”"))
         {
             delete root->left  ();
             delete root->right ();
@@ -314,11 +314,11 @@ void DeleteBase (Node* root)
             root->left  () = nullptr;
             root->right () = nullptr;
 
-            root->key () = "Неизвестно кто";
+            root->key () = "РќРµРёР·РІРµСЃС‚РЅРѕ РєС‚Рѕ";
         }
 
-        else if (Compare (ans, "Нет") || Compare (ans, "Н"))
-            PrintSiri ("Я рада вашему обдуманному решению\n");
+        else if (Compare (ans, "РќРµС‚") || Compare (ans, "Рќ"))
+            PrintSiri ("РЇ СЂР°РґР° РІР°С€РµРјСѓ РѕР±РґСѓРјР°РЅРЅРѕРјСѓ СЂРµС€РµРЅРёСЋ\n");
 
         else
             continue;
@@ -341,7 +341,7 @@ void SiriThink (Node* root)
 
         if (vect == 1)
         {
-            buffer += "не ";
+            buffer += "РЅРµ ";
             buffer += curr->key ().c_str ();
 
             curr = curr->left ();
@@ -361,16 +361,16 @@ void SiriThink (Node* root)
 
     PrintSiri ("%s", buffer.c_str ());
 
-    PrintSiri ("Это...");
+    PrintSiri ("Р­С‚Рѕ...");
 
     std::string answer;
     std::getline (std::cin, answer, '\n');
 
     if (Compare (answer, curr->key ()))
-        PrintSiri ("Приятно иметь дело с умным человеком\n");
+        PrintSiri ("РџСЂРёСЏС‚РЅРѕ РёРјРµС‚СЊ РґРµР»Рѕ СЃ СѓРјРЅС‹Рј С‡РµР»РѕРІРµРєРѕРј\n");
 
     else
-        PrintSiri ("К сожалению, вы не правы. Это был(а): %s\n", curr->key ().c_str ());
+        PrintSiri ("Рљ СЃРѕР¶Р°Р»РµРЅРёСЋ, РІС‹ РЅРµ РїСЂР°РІС‹. Р­С‚Рѕ Р±С‹Р»(Р°): %s\n", curr->key ().c_str ());
 }
 
 #endif /* BaseFunctions_hpp */
